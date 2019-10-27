@@ -23,9 +23,9 @@ int main() {
       b[i] += diff + 1;
     }
   }
-  vector<long long> psb(n);
+  vector<long long> sb(n);
   for (int i = 1; i < n; i++) {
-    psb[i] = psb[i - 1] + b[i] - a[i];
+    sb[i] = sb[i - 1] + b[i] - a[i];
   }
   vector<long long> c(a);
   for (int i = n - 2; i > -1; i--) {
@@ -34,17 +34,17 @@ int main() {
       c[i] += diff + 1;
     }
   }
-  vector<long long> psc(n);
+  vector<long long> sc(n);
   for (int i = n - 2; i > -1; i--) {
-    psc[i] = psc[i + 1] + c[i] - a[i];
+    sc[i] = sc[i + 1] + c[i] - a[i];
   }
-  long long ans = min(psb[n - 1], psc[0]);
+  long long ans = min(sb[n - 1], sc[0]);
   for (int i = 1; i < n - 1; i++) {
     long long cost;
     if (b[i] > c[i + 1]) {
-      cost = psb[i] + psc[i + 1];
+      cost = sb[i] + sc[i + 1];
     } else {
-      cost = psb[i - 1] + psc[i];
+      cost = sb[i - 1] + sc[i];
     }
     ans = min(ans, cost);
   }
