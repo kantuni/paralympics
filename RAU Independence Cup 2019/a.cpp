@@ -1,34 +1,5 @@
-// TLE
 #include <bits/stdc++.h>
-#define INF (long long) 1e18
 using namespace std;
-
-long long cost(vector<long long> a, int ti) {
-  long long c = 0;
-  for (int i = 1; i < ti; i++) {
-    long long diff = a[i - 1] - a[i];
-    if (diff >= 0) {
-      a[i] += diff + 1;
-      c += diff + 1;
-    }
-  }
-  for (int i = a.size() - 2; i > ti; i--) {
-    long long diff = a[i + 1] - a[i];
-    if (diff >= 0) {
-      a[i] += diff + 1;
-      c += diff + 1;
-    }
-  }
-  long long l = ti > 0 ? a[ti - 1] : 0;
-  long long r = ti < a.size() - 1 ? a[ti + 1] : 0;
-  long mxlr = max(l, r);
-  long long diff = mxlr - a[ti];
-  if (diff >= 0) {
-    a[ti] += diff + 1;
-    c += diff + 1;
-  }
-  return c;
-}
 
 int main() {
   int n;
@@ -37,9 +8,36 @@ int main() {
   for (int i = 0; i < n; i++) {
     cin >> a[i];
   }
-  long long ans = INF;
-  for (int i = 0; i < n; i++) {
-    ans = min(ans, cost(a, i));
+  if (a.size() == 1) {
+    cout << 0 << endl;
+    return 0;
+  }
+  vector<long long> b(a);
+  long long ans = 0;
+  for (int i = b.size() - 2; i > -1; i--) {
+    long long diff = b[i + 1] - b[i];
+    if (diff >= 0) {
+      b[i] += diff + 1;
+      ans += diff + 1;
+    }
+  }
+  long long diff = b[1] - b[0];
+  if (diff >= 0) {
+    b[0] += diff + 1;
+    ans += diff + 1;
+  }
+  long long c = ans, cd = 0;
+  for (int i = 1; i < b.size(); i++) {
+    long long bpp = i > 1 ? b[i - 2] : -1;
+    cd = max(bpp + 1, a[i - 1]) - b[i - 1];
+    b[i - 1] += cd;
+    c += cd;
+    long long bn = i + 1 < b.size() ? b[i + 1] : 0;
+    long long newb = max({b[i - 1] + 1, a[i], bn + 1});
+    cd = newb - b[i];
+    b[i] += cd;
+    c += cd;
+    ans = min(ans, c);
   }
   cout << ans << endl;
   return 0;
