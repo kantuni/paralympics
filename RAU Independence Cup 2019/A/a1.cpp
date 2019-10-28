@@ -24,8 +24,7 @@ int main() {
     b[i - 1] += diff;
     c += diff;
     long long bn = i + 1 < b.size() ? b[i + 1] : 0;
-    long long newb = max({b[i - 1] + 1, a[i], bn + 1});
-    diff = newb - b[i];
+    diff = max({b[i - 1] + 1, a[i], bn + 1}) - b[i];
     b[i] += diff;
     c += diff;
     ans = min(ans, c);
