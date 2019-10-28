@@ -17,18 +17,18 @@ int main() {
       ans += diff + 1;
     }
   }
-  long long c = ans, diff = 0;
+  long long cost = ans, diff = 0;
   for (int i = 1; i < b.size(); i++) {
     long long bpp = i > 1 ? b[i - 2] : -1;
     diff = max(bpp + 1, a[i - 1]) - b[i - 1];
     b[i - 1] += diff;
-    c += diff;
+    cost += diff;
     long long bn = i + 1 < b.size() ? b[i + 1] : 0;
     diff = max({b[i - 1] + 1, a[i], bn + 1}) - b[i];
     b[i] += diff;
-    c += diff;
-    ans = min(ans, c);
+    cost += diff;
+    ans = min(ans, cost);
   }
   cout << ans << endl;
   return 0;
-
+}
