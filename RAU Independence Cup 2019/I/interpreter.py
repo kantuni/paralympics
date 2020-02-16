@@ -5,8 +5,6 @@ heap = {}
 
 
 def evaluate(expr):
-    expr = expr.strip()
-
     global heap
 
     if expr in ascii_lowercase:
@@ -38,7 +36,8 @@ def execute(command, i):
         return int(arg)
 
     if command.startswith('IF'):
-        # IF TEST PART SHOULD BE GREEDY
+        # IF command matching shoud NOT be greedy, 
+        # as nested IF commands would be overlooked.
         test, cmd = re.match(r'IF (.+?) THEN (.+)', command).groups()
         arg1, comp, arg2 = re.match(r'(.+) ([=<>]) (.+)', test).groups()
 
