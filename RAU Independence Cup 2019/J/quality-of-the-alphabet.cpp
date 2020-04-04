@@ -22,7 +22,7 @@ long long fpow(long long x, long long n) {
 
 long long f(long long n, long long k) {
   // Number of strings of length n 
-  // not containing pattern of length k (same letter) =
+  // containing pattern of length k (same letter) =
   // (n - k + 1) * 26 ^ (n - k) - (n - k) * 26 ^ (n - k - 1)
   if (k > n) {
     return fpow(26, n);
