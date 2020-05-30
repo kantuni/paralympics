@@ -30,7 +30,7 @@ long long f(long long n, long long k) {
   long long a = fpow(26, n - k) * (n - k + 1) % P;
   long long b = fpow(26, n - k - 1) * (n - k) % P;
   return fpow(26, n) - (a - b);
-
+}
 
 int main() {
   ios::sync_with_stdio(false);
